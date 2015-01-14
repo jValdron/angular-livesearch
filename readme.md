@@ -1,6 +1,8 @@
 angular-live-search
 ===========
 
+This is a fork of mauriciogentile/angular-livesearch, it includes proper removal of elements when the scope is destroyed.
+
 ##Usage
 
 ### Markup
