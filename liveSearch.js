@@ -135,7 +135,7 @@ angular.module("LiveSearch", ["ng"])
             var searchPopup = $compile(template)(scope);
             document.body.appendChild(searchPopup[0]);
             
-            $scope.$on('destroy', function(){
+            scope.$on('destroy', function(){
              $(searchPopup[0]).remove();
             })
         }
