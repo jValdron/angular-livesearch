@@ -38,6 +38,7 @@ angular.module("LiveSearch", ["ng"])
                     else {
                         element.val(item);
                     }
+                    element.focus();
                 }
                 if ('undefined' !== element.controller('ngModel')) {
                     element.controller('ngModel').$setViewValue(element.val());
@@ -94,7 +95,7 @@ angular.module("LiveSearch", ["ng"])
                 var vals = target.val().split(",");
                 var search_string = vals[vals.length - 1].trim();
                 // Do Search
-                if (search_string.length < 3 || search_string.length > 9) {
+                if (search_string.length < 2 || search_string.length > 9) {
                     scope.visible = false;
                     //unmanaged code needs to force apply
                     scope.$apply();
@@ -131,12 +132,18 @@ angular.module("LiveSearch", ["ng"])
             };
 
             var itemTemplate = element.attr("live-search-item-template") || "{{result}}";
-            var template = "<ul ng-show='visible' ng-style=\"{'top':top,'left':left,'width':width}\" class='searchresultspopup'><li ng-class=\"{ 'selected' : isSelected($index) }\" ng-click='select($index)' ng-repeat='result in results'>" + itemTemplate + "</li></ul>";
+            var template = "<ul ng-show='visible' ng-style=\"{'top':top,'left':left,'width':width}\" class='searchresultspopup' ng-click='$event.preventDefault'>" +
+                               "<li ng-class=\"{ 'selected' : isSelected($index) }\" ng-click='select($index)' ng-repeat='result in results'>" + itemTemplate + "</li>" +
+                           "</ul>";
             var searchPopup = $($compile(template)(scope));
-            $('body').append(searchPopup);
+            $('body').append(searchPopup).on('click.liveSearch', function () {
+                scope.visible = false;
+                scope.$apply();
+            });
 
-            scope.$on('$destroy', function(){
+            scope.$on('$destroy', function () {
                 searchPopup.remove();
+                $('body').off('click.liveSearch');
             });
         }
     };
