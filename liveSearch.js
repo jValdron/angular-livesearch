@@ -134,6 +134,10 @@ angular.module("LiveSearch", ["ng"])
             var template = "<ul ng-show='visible' ng-style=\"{'top':top,'left':left,'width':width}\" class='searchresultspopup'><li ng-class=\"{ 'selected' : isSelected($index) }\" ng-click='select($index)' ng-repeat='result in results'>" + itemTemplate + "</li></ul>";
             var searchPopup = $compile(template)(scope);
             document.body.appendChild(searchPopup[0]);
+            
+            $scope.$on('destroy', function(){
+             $(searchPopup[0]).remove();
+            })
         }
     };
 }]);
