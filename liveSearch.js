@@ -110,7 +110,7 @@ angular.module("LiveSearch", ["ng"])
                         }
                         scope.visible = true;
                     });
-                    promise.finally(function() {
+                    promise['finally'](function() {
                         scope.selectedIndex = -1;
                         scope.results = results.filter(function(elem, pos) {
                             return results.indexOf(elem) == pos;
