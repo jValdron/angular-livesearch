@@ -3,8 +3,7 @@
 angular.module("LiveSearch", ["ng"])
  .directive("liveSearch", ["$compile", "$timeout", function ($compile, $timeout) {
     return {
-        restrict: 'E',
-        replace: true,
+        restrict: 'A',
         scope: {
             liveSearchCallback: '=',
             liveSearchSelect: '=?',
