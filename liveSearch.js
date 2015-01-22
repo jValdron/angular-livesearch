@@ -54,7 +54,7 @@ angular.module("LiveSearch", ["ng"])
                 scope.left = offset.x + 'px';
             });
 
-            element[0].onkeydown = function (e) {
+            $(element).on('onkeydown', function (e) {
                 //keydown
                 if (e.keyCode == 40) {
                     if(scope.selectedIndex + 1 === scope.results.length) {
@@ -81,9 +81,9 @@ angular.module("LiveSearch", ["ng"])
 
                 //unmanaged code needs to force apply
                 scope.$apply();
-            };
+            });
 
-            element[0].onkeyup = function (e) {
+            $(element).on('onkeup', function (e) {
                 if (e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
                     return false;
                 }
@@ -116,7 +116,7 @@ angular.module("LiveSearch", ["ng"])
                         });
                     });
                 }, scope.liveSearchWaitTimeout || 100);
-            };
+            });
 
             var getPosition = function (element) {
                 var xPosition = 0;
