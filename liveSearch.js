@@ -54,7 +54,7 @@ angular.module("LiveSearch", ["ng"])
                 scope.left = offset.x + 'px';
             });
 
-            $(element).on('onkeydown', function (e) {
+            $(element).off('onkeydown.liveSearch').on('onkeydown.liveSearch', function (e) {
                 //keydown
                 if (e.keyCode == 40) {
                     if(scope.selectedIndex + 1 === scope.results.length) {
@@ -83,7 +83,7 @@ angular.module("LiveSearch", ["ng"])
                 scope.$apply();
             });
 
-            $(element).on('onkeup', function (e) {
+            $(element).off('keyup.liveSearch').on('keyup.liveSearch', function (e) {
                 if (e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
                     return false;
                 }
